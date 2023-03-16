@@ -1,12 +1,6 @@
 Rockbuster Stealth LLC i s a movie rental company that used to have stores around the world.
 My main task as a data analyst is using SQL to analyze the data and answer any ad-hoc business questions that other departments may have.in order to do that I used a data set that contains information (tables) about Rockbuster’s film inventory, customers, and payments, among other things.
-
 The Rockbuster Stealth Management Board has asked a series of business questions and they expect data-driven answers that they can use for their 2020 company strategy. Here are the main questions they’d l ike to answer:
-● Which movies contributed the most/least to revenue gain?
-● What was the average rental duration for all videos?
-● Which countries are Rockbuster customers based in?
-● Where are customers with a high l ifetime value based?
-● Do sales figures vary between geographic regions?
 
 
 Find the top 10 countries for Rockbuster in terms of customer numbers.
@@ -105,11 +99,3 @@ SELECT AVG (average_paid) AS Average_paid_amount
 FROM average_paid_cte
 ....................................................
 COMMENT: " By using CTEs in this query.. First, I copied the table I created previously (5 customers in the top 10 cities) to return data from, then I removed the align added after the subquery and started creating CTE using WITH clause followed by the new table name, which is ‘average_paid_cte’. Second, I provided the ‘AS’ keyword & then add the names of the columns from the subquery and change the (amount) into (average_paid). Finally, after adding the inner query, I added a SELECT clause followed by the requirement, which is the average amount paid from the top 5 customers, and returned it from the CTE table (average_paid_cte)."
-
-
-
-
-
-
-
-

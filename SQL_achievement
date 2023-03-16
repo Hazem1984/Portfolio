@@ -52,9 +52,12 @@ GROUP BY A.customer_id, D.city, E.country
 ORDER BY COUNT (A.customer_id) DESC
 LIMIT 10
 ...................................................
-Comment: "       "
+Comment: "  Task 3.7     "
 
 
+
+Find out how many of the top 5 customers are based within each country.
+...................................................
 
 
 

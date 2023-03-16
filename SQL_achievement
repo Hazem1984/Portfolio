@@ -4,12 +4,33 @@ My main task as a data analyst is using SQL to analyze the data and answer any a
 The Rockbuster Stealth Management Board has asked a series of business questions and they expect data-driven answers that they can use for their 2020 company strategy. Here are the main questions they’d l ike to answer:
 ● Which movies contributed the most/least to revenue gain?
 ● What was the average rental duration for all videos?
-● Which countries are Rockbuster customers based i n?
+● Which countries are Rockbuster customers based in?
 ● Where are customers with a high l ifetime value based?
 ● Do sales figures vary between geographic regions?
 
-Write a SQL query to extract the average rental rate for each rating category?
-SELECT rating, AVG (rental_rate) AS Avg_rental_rate
-FROM film
-GROUP BY rating
-ORDER BY Avg_rental_rate DESC
+
+Find the top 10 countries for Rockbuster in terms of customer numbers.
+SELECT D.country_id, D.country,
+       COUNT (A.customer_id) AS Number_of_customers
+FROM customer A
+INNER JOIN address B ON A.address_id = B.address_id
+INNER JOIN city C ON B.city_id = C.city_id
+INNER JOIN country D ON C.country_id = D.country_id
+GROUP BY D.country_id
+ORDER BY COUNT (A.customer_id)
+LIMIT 10
+Comment: (I started by recognizing the tables I needed in my query, which are (Customer, Address, City & Country). Next, I searched for the common KEYS among these tables to input them later in the join syntax. After writing the join syntax, it’s time to organize the result table by GROUPING the (country_id), ORDER the number of customers (customer_id) after pulling them by COUNT, and finally retrieve only the top 10 countries using LIMIT 10.)
+
+Find the top 10 cities within the top 10 countries.
+SELECT D.country, C.city,
+       COUNT (A.customer_id) AS Number_of_customers
+FROM customer A
+INNER JOIN address B ON A.address_id = B.address_id
+INNER JOIN city C ON B.city_id = C.city_id
+INNER JOIN country D ON C.country_id = D.country_id
+WHERE D.country IN ('India','China','United_States','Japan','Mexico','Brazil',
+					'Russian_Federation','Philippines','Turkey','Indonisia')
+GROUP BY D.country, C.city
+ORDER BY COUNT (A.customer_id) DESC
+LIMIT 10
+Comment: " I kept the previous query and added a city column after SELECT, and to recognize the top 10 cities from the top 10 countries, I added (WHERE clause with operator IN followed by the top 10 countries "

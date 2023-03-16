@@ -104,7 +104,7 @@ LIMIT 5)
 SELECT AVG (average_paid) AS Average_paid_amount
 FROM average_paid_cte
 ....................................................
-COMMENT: " First, I copied the table I created previously (5 customers in the top 10 cities) to return data from, then I removed the align added after the subquery and started creating CTE using WITH clause followed by the new table name, which is ‘average_paid_cte’. Second, I provided the ‘AS’ keyword & then add the names of the columns from the subquery and change the (amount) into (average_paid). Finally, after adding the inner query, I added a SELECT clause followed by the requirement, which is the average amount paid from the top 5 customers, and returned it from the CTE table (average_paid_cte)."
+COMMENT: " By using CTEs in this query.. First, I copied the table I created previously (5 customers in the top 10 cities) to return data from, then I removed the align added after the subquery and started creating CTE using WITH clause followed by the new table name, which is ‘average_paid_cte’. Second, I provided the ‘AS’ keyword & then add the names of the columns from the subquery and change the (amount) into (average_paid). Finally, after adding the inner query, I added a SELECT clause followed by the requirement, which is the average amount paid from the top 5 customers, and returned it from the CTE table (average_paid_cte)."
 
 
 

@@ -3,7 +3,8 @@ My main task as a data analyst is using SQL to analyze the data and answer any a
 The Rockbuster Stealth Management Board has asked a series of business questions and they expect data-driven answers that they can use for their 2020 company strategy. Here are the main questions they’d l ike to answer:
 
 
-Find the top 10 countries for Rockbuster in terms of customer numbers.
+Challenge (1) Find the top 10 countries for Rockbuster in terms of customer numbers.
+....................................................
 SELECT D.country_id, D.country,
        COUNT (A.customer_id) AS Number_of_customers
 FROM customer A
@@ -13,9 +14,11 @@ INNER JOIN country D ON C.country_id = D.country_id
 GROUP BY D.country_id
 ORDER BY COUNT (A.customer_id)
 LIMIT 10
+....................................................
 Comment: (I started by recognizing the tables I needed in my query, which are (Customer, Address, City & Country). Next, I searched for the common KEYS among these tables to input them later in the join syntax. After writing the join syntax, it’s time to organize the result table by GROUPING the (country_id), ORDER the number of customers (customer_id) after pulling them by COUNT, and finally retrieve only the top 10 countries using LIMIT 10.)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Find the top 10 cities within the top 10 countries.
+Challenge (2) Find the top 10 cities within the top 10 countries.
 ...................................................
 SELECT D.country, C.city,
        COUNT (A.customer_id) AS Number_of_customers
@@ -30,8 +33,9 @@ ORDER BY COUNT (A.customer_id) DESC
 LIMIT 10
 ...................................................
 Comment: " I kept the previous query and added a city column after SELECT, and to recognize the top 10 cities from the top 10 countries, I added (WHERE clause with operator IN followed by the top 10 countries "
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Find the top 5 customers in the top 10 cities who have paid the highest total amounts to Rockbuster.
+Challenge (3) Find the top 5 customers in the top 10 cities who have paid the highest total amounts to Rockbuster.
 ...................................................
 SELECT A.customer_id, A.first_name, A.last_name,
        D.city, E.country, SUM (B.amount) AS Total_payments
@@ -46,11 +50,11 @@ GROUP BY A.customer_id, D.city, E.country
 ORDER BY COUNT (A.customer_id) DESC
 LIMIT 10
 ...................................................
-Comment: "  Task 3.7     "
+Comment: " After the join syntax, I used the WHERE clause with an operator, followed by GROUP BY and ORDER BY. The output should included the following
+columns (Customer ID, Customer First_Name and Last_Name, Country, City, Total_payments "
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-
-
-Find out how many of the top 5 customers are based within each country.
+Challenge (4) Find out how many of the top 5 customers are based within each country.
 ...................................................
 SELECT DISTINCT (A.country),
                 COUNT (DISTINCT D.customer_id) AS All_customers_count,
@@ -75,12 +79,11 @@ ON A.country = Top_5_customers.country
 GROUP BY A.country, Top_5_customers
 ORDER BY All_customers_count DESC
 LIMIT 5;
-....................................................
+.....................................................
 COMMENT: " I used the subquery as we retrieve data from multiple tables and create a whole new one in the database."
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-
-Find the average amount paid by the top 5 customers.
+Challenge (5) Find the average amount paid by the top 5 customers.
 ....................................................
 WITH average_paid_cte (customer_id,first_name,last_name,city,country,average_paid) AS
 (SELECT A.customer_id, A.first_name, A.last_name,
@@ -99,3 +102,5 @@ SELECT AVG (average_paid) AS Average_paid_amount
 FROM average_paid_cte
 ....................................................
 COMMENT: " By using CTEs in this query.. First, I copied the table I created previously (5 customers in the top 10 cities) to return data from, then I removed the align added after the subquery and started creating CTE using WITH clause followed by the new table name, which is ‘average_paid_cte’. Second, I provided the ‘AS’ keyword & then add the names of the columns from the subquery and change the (amount) into (average_paid). Finally, after adding the inner query, I added a SELECT clause followed by the requirement, which is the average amount paid from the top 5 customers, and returned it from the CTE table (average_paid_cte)."
+
+
